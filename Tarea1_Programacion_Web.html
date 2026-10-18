@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarea 1 - Evolución de las aplicaciones web</title>
+<style>
+  :root{
+    --tinta:#000000;
+    --acento:#1f3b5c;
+    --acento2:#c0922e;
+    --gris:#f2f2f2;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  body{
+    color:var(--tinta);
+    font-family:"Georgia","Cambria",serif;
+    line-height:1.7;
+    font-size:12pt;
+    background:#ffffff;
+  }
+
+  /* ====== PORTADA ====== */
+  .portada{
+    position:relative;
+    height:100vh;
+    page-break-after:always;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:0;
+    overflow:hidden;
+  }
+  .portada::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; bottom:0;
+    width:18px;
+    background:linear-gradient(180deg,var(--acento) 0%, var(--acento2) 100%);
+  }
+  .portada-top{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    padding:48px 56px 0 72px;
+  }
+  .portada-top img{
+    width:120px;
+    height:auto;
+  }
+  .portada-top .inst{
+    font-family:"Segoe UI","Arial",sans-serif;
+    font-size:13pt;
+    font-weight:600;
+    letter-spacing:.3px;
+    color:var(--tinta);
+  }
+  .portada-top .inst small{
+    display:block;
+    font-weight:400;
+    font-size:10.5pt;
+    margin-top:4px;
+    color:var(--tinta);
+  }
+
+  .portada-centro{
+    padding:0 56px 0 72px;
+  }
+  .etiqueta-act{
+    font-family:"Segoe UI","Arial",sans-serif;
+    display:inline-block;
+    background:var(--acento);
+    color:#ffffff;
+    padding:6px 16px;
+    font-size:11pt;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .titulo-act{
+    font-family:"Segoe UI","Arial",sans-serif;
+    font-size:26pt;
+    font-weight:700;
+    line-height:1.2;
+    color:var(--tinta);
+    border-bottom:3px solid var(--acento2);
+    padding-bottom:18px;
+    max-width:620px;
+  }
+
+  .portada-datos{
+    font-family:"Segoe UI","Arial",sans-serif;
+    padding:0 56px 56px 72px;
+    font-size:12pt;
+  }
+  .portada-datos table{ border-collapse:collapse; }
+  .portada-datos td{
+    padding:5px 0;
+    color:var(--tinta);
+    vertical-align:top;
+  }
+  .portada-datos td.k{
+    font-weight:700;
+    width:170px;
+    padding-right:14px;
+  }
+
+  /* ====== CUERPO ====== */
+  .contenido{
+    padding:40px 60px;
+  }
+  h1.seccion{
+    font-family:"Segoe UI","Arial",sans-serif;
+    font-size:17pt;
+    color:var(--tinta);
+    margin:26px 0 10px;
+    padding-left:14px;
+    border-left:6px solid var(--acento);
+    page-break-after:avoid;
+  }
+  h2.sub{
+    font-family:"Segoe UI","Arial",sans-serif;
+    font-size:13pt;
+    color:var(--tinta);
+    margin:18px 0 6px;
+    page-break-after:avoid;
+  }
+  p{ text-align:justify; margin:0 0 12px; color:var(--tinta); }
+  ul,ol{ margin:0 0 14px 26px; }
+  li{ margin-bottom:7px; text-align:justify; }
+
+  .nota{
+    background:var(--gris);
+    border-left:4px solid var(--acento2);
+    padding:12px 16px;
+    margin:16px 0;
+    font-size:11pt;
+  }
+  .ref li{ font-size:11pt; }
+
+  table.cmp{
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0 18px;
+    font-family:"Segoe UI","Arial",sans-serif;
+    font-size:10.5pt;
+  }
+  table.cmp th, table.cmp td{
+    border:1px solid #999;
+    padding:7px 9px;
+    text-align:left;
+    vertical-align:top;
+    color:var(--tinta);
+  }
+  table.cmp th{
+    background:var(--gris);
+    font-weight:700;
+  }
+
+  .pagebreak{ page-break-before:always; }
+
+  @media print{
+    @page{ margin:0; }
+    .contenido{ padding:36px 54px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== PORTADA =================== -->
+<section class="portada">
+  <div class="portada-top">
+    <img src="Logo_tese.jpg" alt="Logo TESE">
+    <div class="inst">
+      Tecnológico de Estudios Superiores de Ecatepec
+      <small>División de Ingeniería en Sistemas Computacionales</small>
+    </div>
+  </div>
+
+  <div class="portada-centro">
+    <span class="etiqueta-act">Actividad 1</span>
+    <div class="titulo-act">Evolución de las aplicaciones web</div>
+  </div>
+
+  <div class="portada-datos">
+    <table>
+      <tr><td class="k">Institución</td><td>Tecnológico de Estudios Superiores de Ecatepec</td></tr>
+      <tr><td class="k">Carrera</td><td>División de Ingeniería en Sistemas Computacionales</td></tr>
+      <tr><td class="k">Materia</td><td>Programación Web</td></tr>
+      <tr><td class="k">Nombre</td><td>Marcos Joaquín García Villanueva</td></tr>
+      <tr><td class="k">Nombre del Profesor</td><td>Alejandra González Sánchez</td></tr>
+      <tr><td class="k">Grupo</td><td>5501</td></tr>
+      <tr><td class="k">Actividad</td><td>1 — Evolución de las aplicaciones web</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- =================== CONTENIDO =================== -->
+<div class="contenido">
+
+  <h1 class="seccion">Introducción</h1>
+  <p>Las aplicaciones web constituyen hoy una de las plataformas de software más importantes del mundo. Prácticamente cualquier servicio digital que utilizamos a diario —correo electrónico, banca en línea, comercio electrónico, redes sociales, plataformas de transmisión de video o sistemas empresariales— se apoya, total o parcialmente, en tecnologías web. Sin embargo, este nivel de madurez no apareció de un día para otro: es el resultado de más de tres décadas de evolución técnica, en las que cada generación de herramientas resolvió las limitaciones de la anterior y abrió nuevas posibilidades.</p>
+  <p>Comprender esta evolución no es un ejercicio meramente histórico. Conocer de dónde vienen las tecnologías actuales permite entender por qué funcionan como lo hacen, qué problemas fueron diseñadas para resolver y cuándo conviene utilizar cada una. Para un desarrollador que debe preparar un ambiente de desarrollo moderno, este conocimiento es la base para tomar decisiones de arquitectura informadas en lugar de seguir modas pasajeras.</p>
+  <p>En el contexto de PropertyStream Tech, empresa del sector PropTech responsable de plataformas como Smart Listings y RentStream, este análisis cobra especial relevancia. La compañía utiliza tecnologías modernas como Swift para el desarrollo móvil, Firebase como backend gestionado y GitHub para el control de versiones y la documentación del trabajo. Todas estas herramientas son el resultado directo de los hitos históricos que se analizarán a lo largo de este informe. El objetivo es, por tanto, trazar la línea completa que conecta los orígenes de la web con las prácticas actuales de desarrollo dentro de la industria inmobiliaria tecnológica.</p>
+
+  <h1 class="seccion">Objetivos del informe</h1>
+  <ul>
+    <li>Investigar las etapas históricas de la evolución de las aplicaciones web, desde sus inicios hasta la actualidad, identificando los hitos clave de cada periodo.</li>
+    <li>Analizar cómo esos hitos han influido en las tecnologías y arquitecturas que se utilizan actualmente en el desarrollo web.</li>
+    <li>Relacionar esa evolución con el contexto real de una empresa PropTech como PropertyStream Tech y las tecnologías que emplea (Swift, Firebase, GitHub).</li>
+    <li>Documentar el análisis de forma estructurada para su publicación y versionado en un repositorio de GitHub.</li>
+  </ul>
+
+  <h1 class="seccion">¿Qué es una aplicación web?</h1>
+  <p>Una aplicación web es un programa de software cuyo cliente se ejecuta dentro de un navegador y cuya lógica puede residir parcial o totalmente en un servidor remoto. A diferencia de las aplicaciones de escritorio tradicionales, que se instalan en el equipo del usuario, las aplicaciones web se acceden a través de una URL y no requieren, en la mayoría de los casos, instalación previa. Esta característica —accesibilidad universal mediante un navegador— es precisamente la que explica el enorme éxito del modelo web.</p>
+  <p>Toda aplicación web descansa sobre tres pilares fundamentales que se definieron en los primeros años de la Web: el lenguaje de marcado HTML, que estructura el contenido; el protocolo HTTP, que regula la comunicación entre cliente y servidor; y el sistema de direcciones URL, que permite identificar y localizar cada recurso. Sobre esa base mínima se han ido acumulando capas de tecnología que dieron lugar a las plataformas interactivas de hoy.</p>
+
+  <h1 class="seccion">Etapa 1: La web estática (1990 – 1995)</h1>
+  <p>El origen de la World Wide Web se sitúa en 1989, cuando Tim Berners-Lee, trabajando en el CERN, propuso un sistema de gestión de información basado en documentos enlazados mediante hipervínculos. Su implementación a inicios de los años noventa dio lugar al primer navegador, el primer servidor web y las primeras páginas HTML.</p>
+  <h2 class="sub">Características principales</h2>
+  <p>En esta etapa las páginas eran completamente estáticas. El servidor almacenaba archivos HTML y los entregaba tal cual al navegador que los solicitaba. No existía personalización: todos los usuarios recibían exactamente el mismo contenido. La interacción se reducía a navegar entre documentos siguiendo enlaces, sin lógica del lado del cliente ni posibilidad de modificar la información mostrada.</p>
+  <h2 class="sub">Tecnologías de la época</h2>
+  <p>Las piezas tecnológicas eran mínimas pero decisivas: HTML como lenguaje de marcado, HTTP como protocolo de transferencia y la URL como mecanismo de direccionamiento. La aparición de navegadores como Mosaic (1993) y posteriormente Netscape Navigator popularizó el acceso a la Web fuera del ámbito académico, llevándola a un público cada vez más amplio.</p>
+  <div class="nota"><strong>Hito clave:</strong> la estandarización de HTML, HTTP y la URL estableció los cimientos sobre los que se construiría todo el desarrollo web posterior. Aún hoy, cualquier aplicación web moderna sigue hablando el mismo idioma básico definido en esta etapa.</div>
+
+  <h1 class="seccion">Etapa 2: La web dinámica del lado del servidor (1995 – 2000)</h1>
+  <p>La limitación evidente de la web estática —entregar siempre el mismo contenido— impulsó el desarrollo de mecanismos para generar páginas de forma dinámica. Así nació la web dinámica del lado del servidor, en la que el contenido se construye en el momento de la petición a partir de bases de datos y de la lógica del programa.</p>
+  <h2 class="sub">La llegada de los lenguajes del servidor</h2>
+  <p>Tecnologías como CGI (Common Gateway Interface) permitieron ejecutar programas en el servidor para producir HTML dinámico. Poco después surgieron lenguajes y plataformas diseñados específicamente para la web: PHP (1995), Active Server Pages (ASP) de Microsoft y JavaServer Pages (JSP) de Sun. Estas herramientas facilitaron la creación de sitios con contenido personalizado, formularios, sistemas de autenticación y manejo de sesiones.</p>
+  <h2 class="sub">JavaScript y la interactividad en el cliente</h2>
+  <p>En 1995 Brendan Eich creó JavaScript en Netscape. Aunque inicialmente servía para validaciones sencillas de formularios y pequeños efectos visuales, su aparición fue determinante: por primera vez el navegador podía ejecutar lógica sin depender por completo del servidor. Este lenguaje se convertiría, décadas más tarde, en el motor de las aplicaciones web modernas.</p>
+  <h2 class="sub">Bases de datos y persistencia</h2>
+  <p>La web dinámica consolidó el uso de bases de datos relacionales como MySQL y PostgreSQL para almacenar y recuperar información de forma estructurada. La combinación de un lenguaje de servidor con una base de datos dio lugar a la arquitectura clásica de tres capas: presentación, lógica de negocio y datos.</p>
+  <div class="nota"><strong>Hito clave:</strong> la separación entre presentación y datos sentó las bases del modelo cliente-servidor moderno y del concepto de aplicación web como software con estado, capaz de recordar y personalizar la experiencia de cada usuario.</div>
+
+  <div class="pagebreak"></div>
+  <h1 class="seccion">Etapa 3: AJAX y la Web 2.0 (2000 – 2010)</h1>
+  <p>El inicio del nuevo milenio trajo un cambio de paradigma en la experiencia de usuario. Hasta entonces, cada interacción relevante implicaba recargar la página completa, lo que resultaba lento y poco fluido. La técnica AJAX cambió por completo esta dinámica.</p>
+  <h2 class="sub">La técnica AJAX</h2>
+  <p>AJAX (Asynchronous JavaScript and XML) permitió que el navegador intercambiara datos con el servidor en segundo plano, mediante el objeto XMLHttpRequest, y actualizara únicamente las partes necesarias de la página sin recargarla por completo. Aplicaciones como Gmail (2004) y Google Maps (2005) demostraron que una aplicación web podía ofrecer una experiencia comparable a la de una aplicación de escritorio.</p>
+  <h2 class="sub">La filosofía Web 2.0</h2>
+  <p>El término Web 2.0 describe la transición de una web de consumo pasivo a una web participativa, donde el usuario genera y comparte contenido. Surgieron blogs, wikis, redes sociales como Facebook y Twitter, y plataformas colaborativas. Las APIs públicas permitieron que los servicios se conectaran entre sí, dando origen a los primeros mashups y a un ecosistema de servicios interconectados.</p>
+  <h2 class="sub">Consecuencias para el desarrollo</h2>
+  <p>Esta etapa elevó las expectativas de los usuarios respecto a la velocidad y la interactividad. El front-end comenzó a cobrar un peso propio y surgieron las primeras bibliotecas para simplificar el trabajo con JavaScript, como jQuery (2006), que abstraía las diferencias entre navegadores y facilitaba la manipulación del DOM.</p>
+  <div class="nota"><strong>Hito clave:</strong> el objeto XMLHttpRequest y el nacimiento de las interfaces ricas (RIA) marcaron el inicio de las aplicaciones web verdaderamente interactivas y sentaron las bases del front-end moderno.</div>
+
+  <h1 class="seccion">Etapa 4: Single Page Applications y frameworks de front-end (2010 – 2016)</h1>
+  <p>El crecimiento de la complejidad de las interfaces hizo que manipular el DOM manualmente con jQuery resultara difícil de mantener en proyectos grandes. La respuesta fueron los frameworks de front-end y el modelo de las Single Page Applications.</p>
+  <h2 class="sub">El modelo SPA</h2>
+  <p>En una Single Page Application, la aplicación se carga una sola vez y, a partir de ahí, el enrutamiento y el renderizado ocurren en el cliente. En lugar de pedir páginas completas al servidor, la aplicación consume datos a través de APIs y actualiza la interfaz de forma dinámica. Esto produce una experiencia rápida y fluida, muy parecida a la de una aplicación nativa.</p>
+  <h2 class="sub">Los grandes frameworks</h2>
+  <p>AngularJS (2010) de Google introdujo conceptos como el enlace de datos bidireccional. React (2013) de Facebook popularizó la programación basada en componentes y el DOM virtual, optimizando el rendimiento del renderizado. Vue.js (2014) ofreció una alternativa ligera y accesible. Estos frameworks estructuraron el desarrollo de interfaces complejas y siguen siendo dominantes en la actualidad.</p>
+  <h2 class="sub">Node.js y JavaScript en el servidor</h2>
+  <p>En 2009, Node.js llevó JavaScript al lado del servidor, permitiendo usar un mismo lenguaje en todo el stack. Junto con el gestor de paquetes npm, dio origen a un ecosistema enorme de módulos reutilizables y consolidó el modelo de APIs REST que intercambian datos en formato JSON.</p>
+  <div class="nota"><strong>Hito clave:</strong> la separación total entre back-end (una API que expone datos) y front-end (un cliente que los consume) se convirtió en el estándar de arquitectura, habilitando que web y móvil compartieran un mismo servidor.</div>
+
+  <div class="pagebreak"></div>
+  <h1 class="seccion">Etapa 5: Nube, servicios gestionados y "móvil primero" (2016 – actualidad)</h1>
+  <p>La etapa más reciente se caracteriza por la externalización de la infraestructura y por la convergencia entre la web y lo móvil. Los desarrolladores dejaron de administrar servidores físicos para apoyarse en servicios en la nube que escalan automáticamente.</p>
+  <h2 class="sub">Computación en la nube</h2>
+  <p>Proveedores como Amazon Web Services, Google Cloud y Microsoft Azure ofrecen infraestructura bajo demanda. Los contenedores (Docker), la orquestación (Kubernetes) y las arquitecturas de microservicios permiten construir sistemas distribuidos, resilientes y escalables. El modelo serverless lleva esta idea al extremo: el desarrollador escribe funciones y el proveedor se encarga de ejecutarlas y escalarlas.</p>
+  <h2 class="sub">Backend as a Service y Firebase</h2>
+  <p>Plataformas como Firebase, de Google, ofrecen Backend as a Service: autenticación de usuarios, bases de datos en tiempo real, almacenamiento de archivos y notificaciones, todo gestionado sin necesidad de administrar servidores. Esto permite que equipos pequeños lancen productos completos y escalables con mucho menos esfuerzo de infraestructura.</p>
+  <h2 class="sub">Progressive Web Apps y "móvil primero"</h2>
+  <p>Las Progressive Web Apps (PWA) acercan la experiencia web a la de una aplicación nativa: funcionan sin conexión, pueden instalarse en el dispositivo y envían notificaciones. En paralelo, el enfoque "móvil primero" reconoce que la mayoría del tráfico proviene de dispositivos móviles, por lo que el diseño parte de la pantalla pequeña hacia la grande.</p>
+  <div class="nota"><strong>Hito clave:</strong> la externalización de la infraestructura y la integración continua mediante repositorios como GitHub permiten ciclos de desarrollo rápidos, despliegues automáticos y colaboración distribuida a escala global.</div>
+
+  <h1 class="seccion">Tabla comparativa de las etapas</h1>
+  <table class="cmp">
+    <thead>
+      <tr><th>Etapa</th><th>Periodo</th><th>Tecnologías representativas</th><th>Aporte principal</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Web estática</td><td>1990–1995</td><td>HTML, HTTP, URL</td><td>Documentos enlazados accesibles por navegador</td></tr>
+      <tr><td>Web dinámica</td><td>1995–2000</td><td>CGI, PHP, ASP, JSP, MySQL</td><td>Contenido personalizado y estado de usuario</td></tr>
+      <tr><td>AJAX / Web 2.0</td><td>2000–2010</td><td>XMLHttpRequest, jQuery, APIs</td><td>Interactividad sin recargar la página</td></tr>
+      <tr><td>SPA / Frameworks</td><td>2010–2016</td><td>Angular, React, Vue, Node.js</td><td>Separación total front-end / back-end</td></tr>
+      <tr><td>Nube / Móvil primero</td><td>2016–hoy</td><td>Firebase, Docker, PWA, serverless</td><td>Infraestructura gestionada y escalable</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pagebreak"></div>
+  <h1 class="seccion">Influencia de los hitos en las tecnologías actuales</h1>
+  <p>Cada etapa dejó una herencia concreta y acumulativa en el desarrollo web contemporáneo. La web estática aportó el lenguaje común (HTML, HTTP, URL) que todavía usamos. La web dinámica introdujo la separación entre presentación y datos, que evolucionó hasta la arquitectura de APIs que hoy conecta aplicaciones móviles y web con un mismo back-end. La era de AJAX heredó la idea de actualizar la interfaz sin recargar, hoy presente en cualquier aplicación reactiva. Las SPA consolidaron la programación por componentes y el desacople entre cliente y servidor. Finalmente, la nube permitió que el desarrollo se concentrara en el producto y no en la infraestructura.</p>
+  <p>Esta herencia explica por qué las tecnologías modernas tienen la forma que tienen. React existe porque las interfaces se volvieron demasiado complejas para manipular el DOM a mano. Firebase existe porque administrar servidores resultaba costoso y lento para equipos pequeños. GitHub existe porque el desarrollo colaborativo y distribuido necesitaba un sistema robusto de control de versiones. Ninguna de estas herramientas surgió de forma aislada: todas son respuestas a problemas planteados en etapas anteriores.</p>
+
+  <h1 class="seccion">Aplicación al caso de PropertyStream Tech</h1>
+  <p>El recorrido histórico anterior se materializa de forma muy directa en las decisiones tecnológicas de PropertyStream Tech, empresa del sector PropTech responsable de las plataformas Smart Listings y RentStream.</p>
+  <h2 class="sub">Firebase como backend gestionado</h2>
+  <p>El uso de Firebase es consecuencia directa de la etapa de servicios en la nube y Backend as a Service. Gracias a su base de datos en tiempo real, Smart Listings puede reflejar de inmediato los cambios en los listados de propiedades —precio, disponibilidad, fotografías— sin que el usuario deba recargar. La autenticación gestionada de Firebase simplifica el registro y el inicio de sesión, y sus notificaciones mantienen informados a arrendadores e inquilinos en RentStream. Todo ello sin que la empresa deba administrar servidores propios.</p>
+  <h2 class="sub">Swift y el enfoque "móvil primero"</h2>
+  <p>El uso de Swift para el cliente móvil responde al enfoque "móvil primero" heredado de la última etapa evolutiva. Dado que gran parte de los usuarios de plataformas inmobiliarias consulta propiedades desde el teléfono, una aplicación nativa rápida y fluida ofrece una ventaja competitiva clara. Swift permite construir ese cliente aprovechando al máximo las capacidades del dispositivo, mientras consume los datos expuestos por el back-end, siguiendo el modelo de separación cliente-servidor consolidado en la etapa de las SPA.</p>
+  <h2 class="sub">GitHub como columna vertebral del trabajo</h2>
+  <p>GitHub materializa las prácticas de integración continua, control de versiones y documentación surgidas con la industrialización del software. En PropertyStream Tech, el equipo documenta su análisis, versiona el código de Smart Listings y RentStream, revisa cambios mediante pull requests y mantiene un historial completo del proyecto. Es, además, el lugar donde se publica el informe de este mismo análisis, cerrando el ciclo entre la teoría y la práctica.</p>
+  <div class="nota"><strong>Relación directa:</strong> Smart Listings aprovecha la sincronización en tiempo real (herencia de AJAX y la nube), RentStream se apoya en servicios gestionados (Firebase) y clientes móviles nativos (Swift), y ambos proyectos se documentan y versionan en GitHub. Los hitos históricos no son teoría aislada: están presentes en cada decisión técnica de la empresa.</div>
+
+  <h1 class="seccion">Planificación de un ambiente de desarrollo moderno</h1>
+  <p>Comprender la evolución de la web también orienta la preparación de un ambiente de desarrollo adecuado. Un entorno actual suele incluir: un editor de código con soporte para el lenguaje y el framework elegidos; un sistema de control de versiones basado en Git y alojado en GitHub; un gestor de dependencias (como npm o Swift Package Manager); herramientas de automatización de pruebas; y una canalización de integración y despliegue continuos. Elegir cada una de estas piezas con conocimiento de su origen y propósito evita decisiones arbitrarias y facilita el mantenimiento del proyecto a largo plazo.</p>
+  <ul>
+    <li><strong>Control de versiones:</strong> Git + GitHub para historial, ramas y colaboración.</li>
+    <li><strong>Back-end:</strong> servicios gestionados como Firebase cuando se prioriza la velocidad de desarrollo.</li>
+    <li><strong>Front-end / móvil:</strong> frameworks de componentes (React, Vue) o lenguajes nativos (Swift) según el objetivo.</li>
+    <li><strong>Automatización:</strong> pruebas e integración continua para asegurar calidad en cada cambio.</li>
+  </ul>
+
+  <h1 class="seccion">Conclusión</h1>
+  <p>La evolución de las aplicaciones web es, ante todo, una historia de abstracción creciente: de simples documentos estáticos a plataformas distribuidas, interactivas y alojadas en la nube. Cada hito resolvió una limitación de la etapa anterior —la falta de dinamismo, la lentitud de las recargas, la complejidad del front-end, el costo de la infraestructura— y, al hacerlo, abrió un abanico de nuevas posibilidades.</p>
+  <p>Entender este recorrido permite preparar un ambiente de desarrollo sólido y, sobre todo, justificar de manera razonada las tecnologías modernas. En el caso de PropertyStream Tech, herramientas como Swift, Firebase y GitHub no son elecciones caprichosas, sino el resultado natural de décadas de avances acumulados que hoy permiten a la empresa ofrecer plataformas competitivas en la industria PropTech. El estudiante que comprende esta línea de tiempo está mejor preparado para tomar decisiones técnicas con fundamento y para adaptarse a las próximas etapas de una evolución que no se detiene.</p>
+
+  <h1 class="seccion">Referencias</h1>
+  <ul class="ref">
+    <li>Berners-Lee, T. (1989). <em>Information Management: A Proposal</em>. CERN.</li>
+    <li>Mozilla Developer Network. <em>Historia de la Web y tecnologías web</em>. MDN Web Docs.</li>
+    <li>Garrett, J. J. (2005). <em>Ajax: A New Approach to Web Applications</em>. Adaptive Path.</li>
+    <li>Firebase. <em>Documentación oficial de Firebase</em>. Google.</li>
+    <li>Apple Inc. <em>The Swift Programming Language</em>. Apple Developer Documentation.</li>
+    <li>GitHub. <em>Guías de documentación y control de versiones</em>. GitHub Docs.</li>
+    <li>Fielding, R. T. (2000). <em>Architectural Styles and the Design of Network-based Software Architectures</em>. Tesis doctoral, UC Irvine.</li>
+  </ul>
+
+</div>
+
+</body>
+</html>
