@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarea 9 - Tratamiento de formularios del lado del servidor</title>
+<style>
+  :root{ --tinta:#000000; --acento:#1f3b5c; --acento2:#c0922e; --gris:#f2f2f2; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ color:var(--tinta); font-family:"Arial","Helvetica",sans-serif; line-height:1.7; font-size:12pt; background:#ffffff; }
+
+  .portada{ position:relative; height:100vh; page-break-after:always; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; }
+  .portada::before{ content:""; position:absolute; top:0; left:0; bottom:0; width:18px; background:linear-gradient(180deg,var(--acento) 0%, var(--acento2) 100%); }
+  .portada-top{ display:flex; align-items:center; gap:24px; padding:48px 56px 0 72px; }
+  .portada-top img{ width:120px; height:auto; }
+  .portada-top .inst{ font-size:13pt; font-weight:600; color:var(--tinta); }
+  .portada-top .inst small{ display:block; font-weight:400; font-size:10.5pt; margin-top:4px; }
+  .portada-centro{ padding:0 56px 0 72px; }
+  .etiqueta-act{ display:inline-block; background:var(--acento); color:#fff; padding:6px 16px; font-size:11pt; letter-spacing:1px; text-transform:uppercase; margin-bottom:18px; }
+  .titulo-act{ font-size:26pt; font-weight:700; line-height:1.2; color:var(--tinta); border-bottom:3px solid var(--acento2); padding-bottom:18px; max-width:640px; }
+  .portada-datos{ padding:0 56px 56px 72px; font-size:12pt; }
+  .portada-datos table{ border-collapse:collapse; }
+  .portada-datos td{ padding:5px 0; vertical-align:top; }
+  .portada-datos td.k{ font-weight:700; width:170px; padding-right:14px; }
+
+  .contenido{ padding:40px 60px; }
+  h1.seccion{ font-size:17pt; color:var(--tinta); margin:26px 0 10px; padding-left:14px; border-left:6px solid var(--acento); page-break-after:avoid; }
+  h2.sub{ font-size:13pt; color:var(--tinta); margin:18px 0 6px; page-break-after:avoid; }
+  p{ text-align:justify; margin:0 0 12px; }
+  ul,ol{ margin:0 0 14px 26px; }
+  li{ margin-bottom:7px; text-align:justify; }
+
+  .nota{ background:var(--gris); border-left:4px solid var(--acento2); padding:12px 16px; margin:16px 0; font-size:11pt; }
+  .ref li{ font-size:11pt; }
+
+  table.cmp{ width:100%; border-collapse:collapse; margin:14px 0 18px; font-size:10.5pt; }
+  table.cmp th, table.cmp td{ border:1px solid #999; padding:7px 9px; text-align:left; vertical-align:top; }
+  table.cmp th{ background:var(--gris); font-weight:700; }
+
+  pre.code{ background:#1e1e1e; color:#e6e6e6; font-family:"Consolas","Courier New",monospace; font-size:9.5pt; line-height:1.45; padding:14px 16px; border-radius:4px; border-left:4px solid var(--acento2); white-space:pre-wrap; margin:10px 0 16px; }
+  code.inl{ font-family:"Consolas","Courier New",monospace; background:var(--gris); padding:1px 5px; border-radius:3px; font-size:10.5pt; }
+
+  .pagebreak{ page-break-before:always; }
+
+  @media print{
+    @page{ margin:0; }
+    .contenido{ padding:36px 54px; }
+    pre.code{ background:#1e1e1e !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+
+<section class="portada">
+  <div class="portada-top">
+    <img src="Logo_tese.jpg" alt="Logo TESE">
+    <div class="inst">
+      Tecnológico de Estudios Superiores de Ecatepec
+      <small>División de Ingeniería en Sistemas Computacionales</small>
+    </div>
+  </div>
+  <div class="portada-centro">
+    <span class="etiqueta-act">Actividad 9</span>
+    <div class="titulo-act">Tratamiento de formularios del lado del servidor</div>
+  </div>
+  <div class="portada-datos">
+    <table>
+      <tr><td class="k">Institución</td><td>Tecnológico de Estudios Superiores de Ecatepec</td></tr>
+      <tr><td class="k">Carrera</td><td>División de Ingeniería en Sistemas Computacionales</td></tr>
+      <tr><td class="k">Materia</td><td>Programación Web</td></tr>
+      <tr><td class="k">Nombre</td><td>Marcos Joaquín García Villanueva</td></tr>
+      <tr><td class="k">Nombre del Profesor</td><td>Alejandra González Sánchez</td></tr>
+      <tr><td class="k">Grupo</td><td>5501</td></tr>
+      <tr><td class="k">Actividad</td><td>9 — Tratamiento de formularios del lado del servidor</td></tr>
+    </table>
+  </div>
+</section>
+
+<div class="contenido">
+
+  <h1 class="seccion">Introducción</h1>
+  <p>Los formularios son la principal vía de entrada de datos en una aplicación web: registro de usuarios, publicación de propiedades, contacto, etc. Sin embargo, los datos que envía un usuario no se pueden dar por buenos sin más: deben recibirse, validarse y almacenarse de forma estructurada y segura en el servidor. Este proceso se conoce como el tratamiento de formularios del lado del servidor.</p>
+  <p>En el contexto de PropertyStream Tech, este módulo es la base de funcionalidades como la publicación de propiedades en Smart Listings o el registro de usuarios e inquilinos en RentStream. Este documento presenta un módulo funcional en Node.js que recibe los datos de un formulario, valida los campos obligatorios y el formato del correo electrónico, y almacena la información validada en una colección (simulando Firebase). Se documentan las validaciones implementadas y la conexión con la base de datos, y el código se sube a GitHub.</p>
+
+  <h1 class="seccion">Objetivos</h1>
+  <ul>
+    <li>Diseñar un formulario web básico que capture nombre, correo y mensaje.</li>
+    <li>Implementar un script del lado del servidor que reciba los datos y los valide (campos obligatorios y formato de correo).</li>
+    <li>Almacenar los datos validados en una colección de forma estructurada (Firebase).</li>
+    <li>Documentar el proceso: validaciones y conexión con la base de datos.</li>
+    <li>Subir el código final a un repositorio de GitHub.</li>
+  </ul>
+
+  <h1 class="seccion">Paso 1: el formulario web</h1>
+  <p>El formulario captura tres campos relevantes y los envía al servidor mediante el método <code class="inl">POST</code> a la ruta <code class="inl">/enviar</code>.</p>
+  <pre class="code">&lt;form method="POST" action="/enviar"&gt;
+  &lt;label&gt;Nombre:&lt;input type="text" name="nombre"&gt;&lt;/label&gt;
+  &lt;label&gt;Correo:&lt;input type="text" name="correo"&gt;&lt;/label&gt;
+  &lt;label&gt;Mensaje:&lt;textarea name="mensaje"&gt;&lt;/textarea&gt;&lt;/label&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</pre>
+  <p><strong>Explicación:</strong> cada campo tiene un atributo <code class="inl">name</code> que el servidor usará para identificar el dato. El método <code class="inl">POST</code> envía la información en el cuerpo de la petición, lo adecuado para datos que se van a almacenar.</p>
+
+  <h1 class="seccion">Paso 2: recepción y validación en el servidor</h1>
+  <p>El servidor Node.js recibe el cuerpo de la petición, lo interpreta y ejecuta las validaciones antes de guardar nada.</p>
+  <h2 class="sub">Recepción de los datos</h2>
+  <pre class="code">req.on("data", chunk =&gt; { cuerpo += chunk; });
+req.on("end", () =&gt; {
+  const datos = {};
+  cuerpo.split("&amp;").forEach(par =&gt; {
+    const [clave, valor] = par.split("=");
+    datos[clave] = decodeURIComponent((valor || "").replace(/\+/g, " "));
+  });
+  // ... validar y guardar
+});</pre>
+  <p><strong>Explicación:</strong> los datos llegan en fragmentos (<em>chunks</em>) que se van concatenando. Al terminar, se separan por <code class="inl">&amp;</code> y por <code class="inl">=</code> para reconstruir cada par campo-valor, decodificando los caracteres especiales.</p>
+  <h2 class="sub">Validaciones implementadas</h2>
+  <pre class="code">function validarDatos(datos) {
+  const errores = [];
+
+  // Campos obligatorios
+  if (!datos.nombre || datos.nombre.trim() === "") errores.push("El nombre es obligatorio.");
+  if (!datos.correo || datos.correo.trim() === "") errores.push("El correo es obligatorio.");
+  if (!datos.mensaje || datos.mensaje.trim() === "") errores.push("El mensaje es obligatorio.");
+
+  // Formato de correo valido (expresion regular)
+  const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (datos.correo &amp;&amp; !regexCorreo.test(datos.correo)) {
+    errores.push("El formato del correo no es válido.");
+  }
+  return errores;
+}</pre>
+  <p><strong>Explicación de las validaciones:</strong></p>
+  <ul>
+    <li><strong>Campos obligatorios:</strong> se comprueba que nombre, correo y mensaje no estén vacíos (usando <code class="inl">trim()</code> para ignorar espacios).</li>
+    <li><strong>Formato de correo:</strong> una expresión regular verifica que el correo tenga la forma <code class="inl">texto@dominio.extension</code>. Si no cumple, se rechaza.</li>
+    <li>Si hay uno o más errores, el servidor NO guarda nada y devuelve la lista de errores al usuario.</li>
+  </ul>
+
+  <div class="pagebreak"></div>
+  <h1 class="seccion">Paso 3: almacenamiento en Firebase</h1>
+  <p>Una vez que los datos pasan todas las validaciones, se almacenan de forma estructurada en una colección. En este módulo se simula la colección con un archivo JSON que conserva la misma estructura que un documento de Firebase.</p>
+  <pre class="code">function guardarEnColeccion(datos) {
+  let coleccion = [];
+  if (fs.existsSync(COLECCION)) {
+    coleccion = JSON.parse(fs.readFileSync(COLECCION, "utf8"));
+  }
+  const documento = {
+    id: Date.now(),                  // identificador unico (como doc.id)
+    nombre: datos.nombre.trim(),
+    correo: datos.correo.trim(),
+    mensaje: datos.mensaje.trim(),
+    creado: new Date().toISOString()
+  };
+  coleccion.push(documento);
+  fs.writeFileSync(COLECCION, JSON.stringify(coleccion, null, 2));
+  return documento;
+}</pre>
+  <p><strong>Explicación:</strong> cada envío válido crea un documento con un identificador único y una marca de tiempo, y se agrega a la colección. La estructura (id, campos, fecha) es idéntica a la que tendría en Firebase.</p>
+  <div class="nota"><strong>Conexión real con Firebase:</strong> en producción, esta función se reemplazaría por el SDK de Firebase. El código sería prácticamente el mismo a nivel de estructura:
+  <pre class="code" style="margin-top:8px;">// Con Firebase real:
+const db = firebase.firestore();
+await db.collection("contactos").add({
+  nombre: datos.nombre,
+  correo: datos.correo,
+  mensaje: datos.mensaje,
+  creado: firebase.firestore.FieldValue.serverTimestamp()
+});</pre>
+  </div>
+
+  <h1 class="seccion">Paso 4: documentación del flujo completo</h1>
+  <p>El módulo integra los pasos anteriores en un único flujo: el usuario llena el formulario, el servidor recibe el <code class="inl">POST</code>, valida los datos y, si son correctos, los guarda en la colección y confirma el guardado; si hay errores, los muestra sin guardar.</p>
+  <table class="cmp">
+    <thead>
+      <tr><th>Etapa</th><th>Qué ocurre</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1. Envío</td><td>El formulario manda nombre, correo y mensaje por POST.</td></tr>
+      <tr><td>2. Recepción</td><td>El servidor reconstruye los datos del cuerpo de la petición.</td></tr>
+      <tr><td>3. Validación</td><td>Se comprueban obligatorios y formato de correo.</td></tr>
+      <tr><td>4. Almacenamiento</td><td>Si es válido, se guarda un documento en la colección.</td></tr>
+      <tr><td>5. Respuesta</td><td>Se confirma el guardado o se muestran los errores.</td></tr>
+    </tbody>
+  </table>
+
+  <h1 class="seccion">Aplicación en Smart Listings y RentStream</h1>
+  <p>Este módulo es directamente aplicable a la empresa. En <strong>Smart Listings</strong> gestionaría la publicación de propiedades, validando que cada anuncio tenga los campos requeridos antes de guardarlo. En <strong>RentStream</strong> registraría datos de usuarios e inquilinos, asegurando que el correo tenga un formato válido para poder contactarlos. En ambos casos, los datos se almacenarían en Firebase de forma estructurada y el código se versionaría en GitHub.</p>
+
+  <h1 class="seccion">Evidencia: módulo en ejecución</h1>
+  <p>A continuación se muestra la captura del formulario en funcionamiento en
+  <code class="inl">http://localhost:3000</code>, con el mensaje de confirmación tras
+  guardar un registro válido en la colección (archivo <code class="inl">servidor.js</code>).</p>
+  <div style="text-align:center;margin-top:14px;">
+    <img src="cap.png" alt="Captura del formulario en ejecución"
+         style="max-width:100%;border:1px solid #999;">
+  </div>
+
+  <h1 class="seccion">Conclusión</h1>
+  <p>El tratamiento de formularios del lado del servidor es esencial para construir aplicaciones web seguras y confiables. El módulo desarrollado en Node.js recibe los datos de un formulario, valida los campos obligatorios y el formato del correo mediante expresiones regulares, y almacena únicamente la información válida de forma estructurada, simulando la colección de Firebase. Este desarrollo es directamente integrable en Smart Listings y RentStream, y el código quedó documentado y versionado en GitHub, cumpliendo todos los pasos de la actividad.</p>
+
+  <h1 class="seccion">Referencias</h1>
+  <ul class="ref">
+    <li>OpenJS Foundation. <em>Node.js Documentation (http, fs)</em>. nodejs.org.</li>
+    <li>Mozilla Developer Network. <em>Sending form data y expresiones regulares</em>. MDN Web Docs.</li>
+    <li>Google. <em>Cloud Firestore: add data</em>. firebase.google.com.</li>
+    <li>GitHub. <em>GitHub Docs</em>. docs.github.com.</li>
+  </ul>
+
+</div>
+
+</body>
+</html>
