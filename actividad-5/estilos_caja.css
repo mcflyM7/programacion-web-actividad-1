@@ -1,0 +1,89 @@
+body {
+  font-family: Arial, sans-serif;
+  color: #000000;
+  background: #ffffff;
+  margin: 24px;
+}
+
+h1 {
+  color: #1f3b5c;
+  text-align: center;
+}
+
+h2 {
+  color: #1f3b5c;
+  border-bottom: 2px solid #c0922e;
+  padding-bottom: 4px;
+  margin-top: 32px;
+}
+
+/* ===== 1. Diagrama de las cuatro áreas ===== */
+.demo-caja {
+  display: inline-block;
+}
+.margin-label {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 2px;
+}
+.caja-margin {
+  background: #f4d35e;      /* margen: amarillo */
+  padding: 26px;
+  display: inline-block;
+}
+.caja-border {
+  background: #ee964b;      /* borde: naranja */
+  padding: 22px;
+  position: relative;
+}
+.border-label, .padding-label {
+  font-size: 12px;
+  color: #333;
+  margin-bottom: 4px;
+}
+.caja-padding {
+  background: #90be6d;      /* relleno: verde */
+  padding: 22px;
+}
+.caja-content {
+  background: #577590;      /* contenido: azul */
+  color: #ffffff;
+  text-align: center;
+  padding: 24px 36px;
+  font-weight: bold;
+}
+
+/* ===== 2. Tarjetas ===== */
+.fila {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.tarjeta {
+  background: #f2f2f2;
+  margin: 8px;             /* margen externo */
+  border: 2px solid #1f3b5c; /* borde */
+  padding: 16px;           /* relleno interno */
+  border-radius: 8px;
+  width: 200px;
+}
+.tarjeta h3 { color: #1f3b5c; margin-bottom: 8px; }
+.tarjeta p { color: #c0922e; font-weight: bold; }
+
+/* ===== 3. Comparación box-sizing ===== */
+.caja-content-box,
+.caja-border-box {
+  width: 200px;
+  padding: 20px;
+  border: 3px solid #1f3b5c;
+  background: #e3f0ff;
+  text-align: center;
+}
+.caja-content-box {
+  box-sizing: content-box; /* ancho real = 200 + 40 + 6 = 246px */
+}
+.caja-border-box {
+  box-sizing: border-box;  /* ancho real = 200px exactos */
+  background: #fff2d9;
+}

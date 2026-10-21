@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarea 5 - El modelo de caja en CSS</title>
+<style>
+  :root{
+    --tinta:#000000;
+    --acento:#1f3b5c;
+    --acento2:#c0922e;
+    --gris:#f2f2f2;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  body{
+    color:var(--tinta);
+    font-family:"Arial","Helvetica",sans-serif;
+    line-height:1.7;
+    font-size:12pt;
+    background:#ffffff;
+  }
+
+  /* ====== PORTADA ====== */
+  .portada{
+    position:relative;
+    height:100vh;
+    page-break-after:always;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:0;
+    overflow:hidden;
+  }
+  .portada::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; bottom:0;
+    width:18px;
+    background:linear-gradient(180deg,var(--acento) 0%, var(--acento2) 100%);
+  }
+  .portada-top{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    padding:48px 56px 0 72px;
+  }
+  .portada-top img{ width:120px; height:auto; }
+  .portada-top .inst{
+    font-family:"Arial",sans-serif;
+    font-size:13pt;
+    font-weight:600;
+    letter-spacing:.3px;
+    color:var(--tinta);
+  }
+  .portada-top .inst small{
+    display:block;
+    font-weight:400;
+    font-size:10.5pt;
+    margin-top:4px;
+    color:var(--tinta);
+  }
+
+  .portada-centro{ padding:0 56px 0 72px; }
+  .etiqueta-act{
+    font-family:"Arial",sans-serif;
+    display:inline-block;
+    background:var(--acento);
+    color:#ffffff;
+    padding:6px 16px;
+    font-size:11pt;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .titulo-act{
+    font-family:"Arial",sans-serif;
+    font-size:26pt;
+    font-weight:700;
+    line-height:1.2;
+    color:var(--tinta);
+    border-bottom:3px solid var(--acento2);
+    padding-bottom:18px;
+    max-width:640px;
+  }
+
+  .portada-datos{
+    font-family:"Arial",sans-serif;
+    padding:0 56px 56px 72px;
+    font-size:12pt;
+  }
+  .portada-datos table{ border-collapse:collapse; }
+  .portada-datos td{ padding:5px 0; color:var(--tinta); vertical-align:top; }
+  .portada-datos td.k{ font-weight:700; width:170px; padding-right:14px; }
+
+  /* ====== CUERPO ====== */
+  .contenido{ padding:40px 60px; }
+  h1.seccion{
+    font-family:"Arial",sans-serif;
+    font-size:17pt;
+    color:var(--tinta);
+    margin:26px 0 10px;
+    padding-left:14px;
+    border-left:6px solid var(--acento);
+    page-break-after:avoid;
+  }
+  h2.sub{
+    font-family:"Arial",sans-serif;
+    font-size:13pt;
+    color:var(--tinta);
+    margin:18px 0 6px;
+    page-break-after:avoid;
+  }
+  p{ text-align:justify; margin:0 0 12px; color:var(--tinta); }
+  ul,ol{ margin:0 0 14px 26px; }
+  li{ margin-bottom:7px; text-align:justify; }
+
+  .nota{
+    background:var(--gris);
+    border-left:4px solid var(--acento2);
+    padding:12px 16px;
+    margin:16px 0;
+    font-size:11pt;
+  }
+  .ref li{ font-size:11pt; }
+
+  table.cmp{
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0 18px;
+    font-family:"Arial",sans-serif;
+    font-size:10.5pt;
+  }
+  table.cmp th, table.cmp td{
+    border:1px solid #999;
+    padding:7px 9px;
+    text-align:left;
+    vertical-align:top;
+    color:var(--tinta);
+  }
+  table.cmp th{ background:var(--gris); font-weight:700; }
+
+  pre.code{
+    background:#1e1e1e;
+    color:#e6e6e6;
+    font-family:"Consolas","Courier New",monospace;
+    font-size:9.5pt;
+    line-height:1.45;
+    padding:14px 16px;
+    border-radius:4px;
+    border-left:4px solid var(--acento2);
+    white-space:pre-wrap;
+    margin:10px 0 16px;
+  }
+  code.inl{
+    font-family:"Consolas","Courier New",monospace;
+    background:var(--gris);
+    padding:1px 5px;
+    border-radius:3px;
+    font-size:10.5pt;
+  }
+
+  /* diagrama del modelo de caja dentro del informe */
+  .box-diagram{ text-align:center; margin:18px 0; font-family:"Arial",sans-serif; font-size:10pt; }
+  .bx-margin{ display:inline-block; background:#f4d35e; padding:22px; }
+  .bx-border{ background:#ee964b; padding:20px; }
+  .bx-padding{ background:#90be6d; padding:20px; }
+  .bx-content{ background:#577590; color:#fff; padding:20px 34px; font-weight:bold; }
+  .bx-label{ font-size:9pt; color:#333; margin-bottom:3px; text-align:left; }
+
+  .pagebreak{ page-break-before:always; }
+
+  @media print{
+    @page{ margin:0; }
+    .contenido{ padding:36px 54px; }
+    pre.code{ background:#1e1e1e !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .bx-margin,.bx-border,.bx-padding,.bx-content{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =================== PORTADA =================== -->
+<section class="portada">
+  <div class="portada-top">
+    <img src="Logo_tese.jpg" alt="Logo TESE">
+    <div class="inst">
+      Tecnológico de Estudios Superiores de Ecatepec
+      <small>División de Ingeniería en Sistemas Computacionales</small>
+    </div>
+  </div>
+
+  <div class="portada-centro">
+    <span class="etiqueta-act">Actividad 5</span>
+    <div class="titulo-act">El modelo de caja en CSS</div>
+  </div>
+
+  <div class="portada-datos">
+    <table>
+      <tr><td class="k">Institución</td><td>Tecnológico de Estudios Superiores de Ecatepec</td></tr>
+      <tr><td class="k">Carrera</td><td>División de Ingeniería en Sistemas Computacionales</td></tr>
+      <tr><td class="k">Materia</td><td>Programación Web</td></tr>
+      <tr><td class="k">Nombre</td><td>Marcos Joaquín García Villanueva</td></tr>
+      <tr><td class="k">Nombre del Profesor</td><td>Alejandra González Sánchez</td></tr>
+      <tr><td class="k">Grupo</td><td>5501</td></tr>
+      <tr><td class="k">Actividad</td><td>5 — El modelo de caja en CSS</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- =================== CONTENIDO =================== -->
+<div class="contenido">
+
+  <h1 class="seccion">Introducción</h1>
+  <p>Cuando un navegador muestra una página web, cada elemento HTML se representa internamente como una caja rectangular. Comprender cómo se compone y se dimensiona esa caja es uno de los conocimientos más importantes de CSS, porque de él dependen el espaciado, la alineación y, en general, toda la maquetación de una interfaz. Este concepto se conoce como el <strong>modelo de caja</strong> (box model).</p>
+  <p>En el contexto de PropertyStream Tech, el dominio del modelo de caja es esencial para optimizar la interfaz gráfica de herramientas como Smart Listings, donde la estructura visual de las páginas impacta directamente en la experiencia del usuario. Ajustar correctamente márgenes, bordes y rellenos permite crear diseños ordenados, responsivos y estéticamente agradables. Este informe investiga el concepto del modelo de caja y sus componentes, presenta ejemplos prácticos en HTML y CSS, y documenta cómo cada componente afecta el diseño. El entregable se sube además a un repositorio de GitHub, según lo solicitado.</p>
+
+  <h1 class="seccion">Objetivos</h1>
+  <ul>
+    <li>Investigar el concepto del modelo de caja y sus componentes: márgenes, bordes, rellenos y contenido.</li>
+    <li>Crear ejemplos prácticos en HTML y CSS que demuestren la aplicación del modelo de caja.</li>
+    <li>Documentar los ejemplos y el análisis, explicando cómo cada componente afecta el diseño.</li>
+    <li>Subir el resumen y los ejemplos a un repositorio de GitHub, con una presentación clara y estructurada.</li>
+  </ul>
+
+  <h1 class="seccion">¿Qué es el modelo de caja?</h1>
+  <p>El modelo de caja es la forma en que CSS calcula el tamaño y el espacio que ocupa cada elemento. Toda caja está formada por cuatro áreas concéntricas, desde el centro hacia afuera: el <strong>contenido</strong>, el <strong>relleno (padding)</strong>, el <strong>borde (border)</strong> y el <strong>margen (margin)</strong>. El siguiente diagrama ilustra esa composición:</p>
+
+  <div class="box-diagram">
+    <div class="bx-margin">
+      <div class="bx-label">margin</div>
+      <div class="bx-border">
+        <div class="bx-label">border</div>
+        <div class="bx-padding">
+          <div class="bx-label">padding</div>
+          <div class="bx-content">content</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="seccion">Los componentes del modelo de caja</h1>
+
+  <h2 class="sub">1. Contenido (content)</h2>
+  <p>Es el área donde se muestra la información real del elemento: el texto, una imagen o cualquier otro contenido. Sus dimensiones se controlan con las propiedades <code class="inl">width</code> y <code class="inl">height</code>. Es la parte más interna de la caja.</p>
+
+  <h2 class="sub">2. Relleno (padding)</h2>
+  <p>Es el espacio interno entre el contenido y el borde. Sirve para que el contenido "respire" y no quede pegado al borde. Se controla con <code class="inl">padding</code> y puede definirse para cada lado (<code class="inl">padding-top</code>, <code class="inl">padding-right</code>, etc.). El relleno toma el color de fondo del elemento.</p>
+
+  <h2 class="sub">3. Borde (border)</h2>
+  <p>Es la línea que rodea el relleno y el contenido. Se controla con <code class="inl">border</code>, donde se define su grosor, su estilo (sólido, punteado, etc.) y su color. El borde separa visualmente el interior de la caja del espacio exterior.</p>
+
+  <h2 class="sub">4. Margen (margin)</h2>
+  <p>Es el espacio externo que separa la caja de los elementos vecinos. Se controla con <code class="inl">margin</code>. A diferencia del relleno, el margen es transparente (no toma color de fondo) y puede colapsarse con los márgenes de elementos adyacentes.</p>
+
+  <table class="cmp">
+    <thead>
+      <tr><th>Componente</th><th>Propiedad CSS</th><th>Ubicación</th><th>¿Toma color de fondo?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Contenido</td><td>width / height</td><td>Centro de la caja</td><td>Sí</td></tr>
+      <tr><td>Relleno</td><td>padding</td><td>Entre contenido y borde</td><td>Sí</td></tr>
+      <tr><td>Borde</td><td>border</td><td>Alrededor del relleno</td><td>No (color propio)</td></tr>
+      <tr><td>Margen</td><td>margin</td><td>Fuera del borde</td><td>No (transparente)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pagebreak"></div>
+  <h1 class="seccion">La propiedad box-sizing</h1>
+  <p>Por defecto, CSS usa <code class="inl">box-sizing: content-box</code>, lo que significa que el <code class="inl">width</code> declarado se refiere solo al contenido; el relleno y el borde se suman por fuera, aumentando el tamaño total. Esto suele causar confusión al maquetar.</p>
+  <p>La alternativa, <code class="inl">box-sizing: border-box</code>, hace que el <code class="inl">width</code> incluya el relleno y el borde, de modo que el tamaño total es exactamente el declarado. Por eso es muy común usar esta regla al inicio de la hoja de estilos:</p>
+  <pre class="code">* {
+  box-sizing: border-box;
+}</pre>
+  <table class="cmp">
+    <thead>
+      <tr><th>Modo</th><th>width declarado</th><th>padding</th><th>border</th><th>Ancho real</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>content-box</td><td>200px</td><td>20px (x2)</td><td>3px (x2)</td><td>246px</td></tr>
+      <tr><td>border-box</td><td>200px</td><td>20px (x2)</td><td>3px (x2)</td><td>200px</td></tr>
+    </tbody>
+  </table>
+  <div class="nota"><strong>Recomendación:</strong> usar <code class="inl">border-box</code> de forma global simplifica enormemente el cálculo de anchos y evita desbordamientos inesperados, sobre todo en diseños responsivos como los de Smart Listings.</div>
+
+  <h1 class="seccion">Ejemplo práctico 1: las cuatro áreas</h1>
+  <p>El primer ejemplo muestra visualmente las cuatro áreas de la caja usando colores distintos para cada una. El código HTML anida varios <code class="inl">&lt;div&gt;</code> y el CSS les aplica relleno y fondo para que cada capa sea visible.</p>
+  <pre class="code">&lt;div class="caja-margin"&gt;
+  &lt;div class="caja-border"&gt;
+    &lt;div class="caja-padding"&gt;
+      &lt;div class="caja-content"&gt;content&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+  <pre class="code">.caja-margin  { background:#f4d35e; padding:26px; } /* margen  */
+.caja-border  { background:#ee964b; padding:22px; } /* borde   */
+.caja-padding { background:#90be6d; padding:22px; } /* relleno */
+.caja-content { background:#577590; color:#fff; padding:24px 36px; } /* contenido */</pre>
+
+  <h1 class="seccion">Ejemplo práctico 2: tarjetas de propiedad</h1>
+  <p>El segundo ejemplo aplica el modelo de caja a un caso real de Smart Listings: tarjetas de propiedades. Cada tarjeta usa <code class="inl">margin</code> para separarse de las demás, <code class="inl">border</code> para delimitarse y <code class="inl">padding</code> para dar aire al contenido interno.</p>
+  <pre class="code">.tarjeta {
+  background: #f2f2f2;
+  margin: 8px;               /* separación entre tarjetas */
+  border: 2px solid #1f3b5c; /* borde delimitador */
+  padding: 16px;             /* espacio interno */
+  border-radius: 8px;
+  width: 200px;
+}</pre>
+  <p>Al modificar estos tres valores cambia por completo la sensación visual: más <code class="inl">padding</code> da amplitud, más <code class="inl">margin</code> separa los elementos, y el <code class="inl">border</code> aporta definición. Ajustarlos bien es clave para una interfaz limpia.</p>
+
+  <h1 class="seccion">Ejemplo práctico 3: comparación de box-sizing</h1>
+  <p>El tercer ejemplo compara dos cajas con el mismo <code class="inl">width:200px</code>, <code class="inl">padding:20px</code> y <code class="inl">border:3px</code>, pero con distinto <code class="inl">box-sizing</code>. La primera (content-box) termina midiendo 246px de ancho; la segunda (border-box) mide exactamente 200px.</p>
+  <pre class="code">.caja-content-box { box-sizing: content-box; } /* ancho real 246px */
+.caja-border-box  { box-sizing: border-box;  } /* ancho real 200px */</pre>
+
+  <div class="pagebreak"></div>
+  <h1 class="seccion">Cómo cada componente afecta el diseño</h1>
+  <p>Cada parte del modelo de caja cumple un papel concreto en la maquetación:</p>
+  <ul>
+    <li><strong>Contenido:</strong> determina el tamaño base del elemento; de él parte todo el cálculo.</li>
+    <li><strong>Relleno:</strong> mejora la legibilidad al separar el contenido de los bordes; demasiado poco hace que el texto se vea apretado, demasiado lo desperdicia.</li>
+    <li><strong>Borde:</strong> aporta estructura y jerarquía visual; ayuda a distinguir componentes como tarjetas, botones o campos de formulario.</li>
+    <li><strong>Margen:</strong> controla el ritmo y la respiración del diseño; un buen uso del margen evita que la interfaz se vea saturada.</li>
+  </ul>
+  <p>En conjunto, estos cuatro componentes permiten lograr diseños equilibrados, responsivos y agradables. En una plataforma como Smart Listings, un uso cuidadoso del modelo de caja se traduce directamente en una interfaz más clara y en una mejor experiencia de usuario.</p>
+
+  <h1 class="seccion">Relación con el stack de PropertyStream Tech</h1>
+  <p>El modelo de caja es la base de la capa de presentación (CSS) de la empresa. Esa capa se combina con los datos dinámicos que provienen de <strong>Firebase</strong>: por ejemplo, la información de cada propiedad (precio, ubicación, características) se inyecta dentro de la estructura de una tarjeta, cuyo espaciado y bordes define el modelo de caja. A su vez, el código y los ejemplos se documentan y versionan en <strong>GitHub</strong>, lo que permite mantener un historial claro y colaborar en equipo.</p>
+
+  <h1 class="seccion">Evidencia: ejemplos en ejecución</h1>
+  <p>A continuación se incluye la captura de la página de ejemplos del modelo de caja,
+  abierta en el navegador a partir de los archivos
+  <code class="inl">ejemplo_modelo_caja.html</code> y <code class="inl">estilos_caja.css</code>.</p>
+  <div style="text-align:center;margin-top:14px;">
+    <img src="cap.png" alt="Captura de los ejemplos del modelo de caja"
+         style="max-width:100%;border:1px solid #999;">
+  </div>
+
+  <h1 class="seccion">Conclusión</h1>
+  <p>El modelo de caja es un concepto fundamental de CSS que explica cómo se compone y se dimensiona cada elemento de una página: contenido, relleno, borde y margen. Comprender el papel de cada componente, así como el efecto de la propiedad <code class="inl">box-sizing</code>, es indispensable para construir interfaces ordenadas, responsivas y estéticamente agradables. Aplicado al proyecto Smart Listings de PropertyStream Tech, el dominio del modelo de caja permite optimizar la interfaz gráfica y mejorar la experiencia del usuario, integrándose con los datos de Firebase y la gestión de versiones de GitHub.</p>
+
+  <h1 class="seccion">Referencias</h1>
+  <ul class="ref">
+    <li>Mozilla Developer Network. <em>The box model</em>. MDN Web Docs.</li>
+    <li>Mozilla Developer Network. <em>box-sizing</em>. MDN Web Docs.</li>
+    <li>World Wide Web Consortium (W3C). <em>CSS Box Model Module</em>. w3.org.</li>
+    <li>W3Schools. <em>CSS Box Model</em>. w3schools.com.</li>
+    <li>GitHub. <em>GitHub Docs</em>. docs.github.com.</li>
+  </ul>
+
+</div>
+
+</body>
+</html>
