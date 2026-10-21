@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarea 7 - Estructuras de control en JavaScript</title>
+<style>
+  :root{ --tinta:#000000; --acento:#1f3b5c; --acento2:#c0922e; --gris:#f2f2f2; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ color:var(--tinta); font-family:"Arial","Helvetica",sans-serif; line-height:1.7; font-size:12pt; background:#ffffff; }
+
+  .portada{ position:relative; height:100vh; page-break-after:always; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; }
+  .portada::before{ content:""; position:absolute; top:0; left:0; bottom:0; width:18px; background:linear-gradient(180deg,var(--acento) 0%, var(--acento2) 100%); }
+  .portada-top{ display:flex; align-items:center; gap:24px; padding:48px 56px 0 72px; }
+  .portada-top img{ width:120px; height:auto; }
+  .portada-top .inst{ font-size:13pt; font-weight:600; color:var(--tinta); }
+  .portada-top .inst small{ display:block; font-weight:400; font-size:10.5pt; margin-top:4px; }
+  .portada-centro{ padding:0 56px 0 72px; }
+  .etiqueta-act{ display:inline-block; background:var(--acento); color:#fff; padding:6px 16px; font-size:11pt; letter-spacing:1px; text-transform:uppercase; margin-bottom:18px; }
+  .titulo-act{ font-size:26pt; font-weight:700; line-height:1.2; color:var(--tinta); border-bottom:3px solid var(--acento2); padding-bottom:18px; max-width:640px; }
+  .portada-datos{ padding:0 56px 56px 72px; font-size:12pt; }
+  .portada-datos table{ border-collapse:collapse; }
+  .portada-datos td{ padding:5px 0; vertical-align:top; }
+  .portada-datos td.k{ font-weight:700; width:170px; padding-right:14px; }
+
+  .contenido{ padding:40px 60px; }
+  h1.seccion{ font-size:17pt; color:var(--tinta); margin:26px 0 10px; padding-left:14px; border-left:6px solid var(--acento); page-break-after:avoid; }
+  h2.sub{ font-size:13pt; color:var(--tinta); margin:18px 0 6px; page-break-after:avoid; }
+  p{ text-align:justify; margin:0 0 12px; }
+  ul,ol{ margin:0 0 14px 26px; }
+  li{ margin-bottom:7px; text-align:justify; }
+
+  .nota{ background:var(--gris); border-left:4px solid var(--acento2); padding:12px 16px; margin:16px 0; font-size:11pt; }
+  .ref li{ font-size:11pt; }
+
+  table.cmp{ width:100%; border-collapse:collapse; margin:14px 0 18px; font-size:10.5pt; }
+  table.cmp th, table.cmp td{ border:1px solid #999; padding:7px 9px; text-align:left; vertical-align:top; }
+  table.cmp th{ background:var(--gris); font-weight:700; }
+
+  pre.code{ background:#1e1e1e; color:#e6e6e6; font-family:"Consolas","Courier New",monospace; font-size:9.5pt; line-height:1.45; padding:14px 16px; border-radius:4px; border-left:4px solid var(--acento2); white-space:pre-wrap; margin:10px 0 16px; }
+  code.inl{ font-family:"Consolas","Courier New",monospace; background:var(--gris); padding:1px 5px; border-radius:3px; font-size:10.5pt; }
+
+  .pagebreak{ page-break-before:always; }
+
+  @media print{
+    @page{ margin:0; }
+    .contenido{ padding:36px 54px; }
+    pre.code{ background:#1e1e1e !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+
+<section class="portada">
+  <div class="portada-top">
+    <img src="Logo_tese.jpg" alt="Logo TESE">
+    <div class="inst">
+      Tecnológico de Estudios Superiores de Ecatepec
+      <small>División de Ingeniería en Sistemas Computacionales</small>
+    </div>
+  </div>
+  <div class="portada-centro">
+    <span class="etiqueta-act">Actividad 7</span>
+    <div class="titulo-act">Estructuras de control en JavaScript</div>
+  </div>
+  <div class="portada-datos">
+    <table>
+      <tr><td class="k">Institución</td><td>Tecnológico de Estudios Superiores de Ecatepec</td></tr>
+      <tr><td class="k">Carrera</td><td>División de Ingeniería en Sistemas Computacionales</td></tr>
+      <tr><td class="k">Materia</td><td>Programación Web</td></tr>
+      <tr><td class="k">Nombre</td><td>Marcos Joaquín García Villanueva</td></tr>
+      <tr><td class="k">Nombre del Profesor</td><td>Alejandra González Sánchez</td></tr>
+      <tr><td class="k">Grupo</td><td>5501</td></tr>
+      <tr><td class="k">Actividad</td><td>7 — Estructuras de control en JavaScript</td></tr>
+    </table>
+  </div>
+</section>
+
+<div class="contenido">
+
+  <h1 class="seccion">Introducción</h1>
+  <p>Las estructuras de control son el mecanismo que permite a un programa tomar decisiones y repetir acciones. Sin ellas, el código se ejecutaría siempre de la misma forma, de arriba hacia abajo, sin capacidad de reaccionar a los datos. En JavaScript, estas estructuras son la base de cualquier aplicación web dinámica: validar un formulario, filtrar resultados o generar listas depende por completo de ellas.</p>
+  <p>En el contexto de PropertyStream Tech, las estructuras de control hacen posibles funcionalidades reales de Smart Listings y Green Properties Index: validar los datos de entrada de una propiedad (precio, ubicación, tipo) con estructuras de decisión, y generar dinámicamente listas de propiedades eco-friendly con estructuras de iteración. Este informe investiga las estructuras de control de JavaScript, las aplica en scripts funcionales, simula su integración con Firebase y documenta el uso de cada estructura.</p>
+
+  <h1 class="seccion">Objetivos</h1>
+  <ul>
+    <li>Investigar las estructuras de control de JavaScript (if, switch, for, while, do-while) y sus usos.</li>
+    <li>Diseñar un script que valide datos de un formulario con <code class="inl">if</code> y <code class="inl">switch</code>.</li>
+    <li>Crear un script que genere dinámicamente una lista de propiedades eco-friendly con <code class="inl">for</code> o <code class="inl">while</code>.</li>
+    <li>Integrar los scripts con Firebase (simulación) para la interacción con una base de datos.</li>
+    <li>Subir el código a GitHub y documentar el uso de las estructuras de control en cada script.</li>
+  </ul>
+
+  <h1 class="seccion">Estructuras de control en JavaScript</h1>
+  <p>Se dividen en dos grandes grupos: las de <strong>decisión</strong>, que eligen qué código ejecutar según una condición, y las de <strong>iteración</strong> (ciclos), que repiten un bloque de código.</p>
+  <table class="cmp">
+    <thead>
+      <tr><th>Estructura</th><th>Tipo</th><th>Uso típico</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>if / else if / else</td><td>Decisión</td><td>Elegir entre varias condiciones</td></tr>
+      <tr><td>switch</td><td>Decisión</td><td>Comparar una variable contra varios valores fijos</td></tr>
+      <tr><td>for</td><td>Iteración</td><td>Repetir un número conocido de veces o recorrer listas</td></tr>
+      <tr><td>while</td><td>Iteración</td><td>Repetir mientras una condición sea verdadera</td></tr>
+      <tr><td>do-while</td><td>Iteración</td><td>Igual que while, pero se ejecuta al menos una vez</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="sub">Decisión: if y switch</h2>
+  <pre class="code">// if / else if / else
+if (precio &lt; 8000) {
+  categoria = "Económica";
+} else if (precio &lt;= 15000) {
+  categoria = "Media";
+} else {
+  categoria = "Premium";
+}
+
+// switch
+switch (tipo) {
+  case "renta": descripcion = "en renta"; break;
+  case "venta": descripcion = "en venta"; break;
+  default:      descripcion = "no reconocido";
+}</pre>
+
+  <h2 class="sub">Iteración: for, while y do-while</h2>
+  <pre class="code">// for: cuando se conoce el número de repeticiones
+for (let i = 0; i &lt; lista.length; i++) { /* ... */ }
+
+// while: se repite mientras la condición sea verdadera
+let j = 0;
+while (j &lt; lista.length) { j++; }
+
+// do-while: se ejecuta al menos una vez
+let k = 0;
+do { k++; } while (k &lt; 3);</pre>
+
+  <div class="pagebreak"></div>
+  <h1 class="seccion">Script 1: validación de formulario (if + switch)</h1>
+  <p>El primer script valida los datos de un formulario de publicación de propiedades. Usa <code class="inl">if</code> para comprobar que los campos no estén vacíos y que el precio sea un número válido, y <code class="inl">switch</code> para clasificar el tipo de propiedad.</p>
+  <pre class="code">function validarFormulario(evento) {
+  evento.preventDefault();
+  const precio = Number(document.getElementById("precio").value);
+  const ubicacion = document.getElementById("ubicacion").value;
+  const tipo = document.getElementById("tipo").value;
+
+  // Validación con if / else if
+  if (ubicacion === "" || tipo === "") {
+    salida.textContent = "Error: campos obligatorios.";
+    return false;
+  } else if (isNaN(precio)) {
+    salida.textContent = "Error: el precio debe ser un número.";
+    return false;
+  } else if (precio &lt;= 0) {
+    salida.textContent = "Error: el precio debe ser mayor a cero.";
+    return false;
+  }
+
+  // Clasificación con switch
+  switch (tipo) {
+    case "renta": descripcion = "propiedad en renta"; break;
+    case "venta": descripcion = "propiedad en venta"; break;
+    case "eco":   descripcion = "propiedad eco-friendly"; break;
+    default:      descripcion = "tipo no reconocido";
+  }
+}</pre>
+  <p><strong>Uso de las estructuras:</strong> los <code class="inl">if</code> encadenados detienen el proceso y muestran un error si algún dato es inválido (campo vacío, precio no numérico o precio no positivo). El <code class="inl">switch</code> compara el valor de <code class="inl">tipo</code> contra varios casos y asigna la descripción correspondiente; el <code class="inl">default</code> cubre cualquier valor inesperado.</p>
+
+  <h1 class="seccion">Script 2: lista eco-friendly dinámica (for)</h1>
+  <p>El segundo script genera dinámicamente una lista de propiedades eco-friendly recorriendo un arreglo con un ciclo <code class="inl">for</code> y creando un elemento de lista por cada propiedad.</p>
+  <pre class="code">function generarEcoFriendly() {
+  const propiedades = [
+    { nombre: "Casa Solar Norte", ahorro: 40 },
+    { nombre: "Depto Verde Centro", ahorro: 30 },
+    { nombre: "Loft Sustentable", ahorro: 25 },
+    { nombre: "Residencia EcoSur", ahorro: 55 }
+  ];
+  const lista = document.getElementById("listaEco");
+  lista.innerHTML = "";
+
+  for (let i = 0; i &lt; propiedades.length; i++) {
+    const p = propiedades[i];
+    const item = document.createElement("li");
+    item.textContent = `${p.nombre} - ahorro ${p.ahorro}%`;
+    lista.appendChild(item);
+  }
+}</pre>
+  <p><strong>Uso de las estructuras:</strong> el ciclo <code class="inl">for</code> se repite tantas veces como elementos tenga el arreglo (<code class="inl">propiedades.length</code>). En cada vuelta toma una propiedad, crea un <code class="inl">&lt;li&gt;</code> con su nombre y ahorro energético, y lo agrega a la lista. Así la interfaz se construye de forma automática a partir de los datos.</p>
+
+  <div class="pagebreak"></div>
+  <h1 class="seccion">Script 3: integración con Firebase (do-while)</h1>
+  <p>El tercer script simula el guardado de una propiedad en Firebase. Usa un ciclo <code class="inl">do-while</code> para representar reintentos de conexión y <code class="inl">setTimeout</code> para imitar la latencia de red.</p>
+  <pre class="code">function guardarEnFirebase() {
+  let intentos = 0;
+  let conectado = false;
+
+  // do-while: intenta conectar al menos una vez
+  do {
+    intentos++;
+    if (intentos &gt;= 2) { conectado = true; }
+  } while (!conectado &amp;&amp; intentos &lt; 3);
+
+  setTimeout(function () {
+    if (conectado) {
+      salida.textContent = `Guardado tras ${intentos} intento(s).`;
+    } else {
+      salida.textContent = "No se pudo conectar con Firebase.";
+    }
+  }, 1000);
+}</pre>
+  <p><strong>Uso de las estructuras:</strong> el <code class="inl">do-while</code> ejecuta el intento de conexión al menos una vez y lo repite mientras no haya conexión y no se superen 3 intentos. Luego, el <code class="inl">if/else</code> dentro de <code class="inl">setTimeout</code> decide el mensaje final según el resultado. Esto ilustra cómo las estructuras de control gestionan la comunicación con una base de datos real.</p>
+
+  <h1 class="seccion">Relación con Smart Listings y Green Properties Index</h1>
+  <p>Estos scripts reflejan funcionalidades reales de la empresa. La validación con <code class="inl">if</code> y <code class="inl">switch</code> es la que impide publicar propiedades con datos incorrectos en <strong>Smart Listings</strong>, protegiendo la calidad de la información. La generación dinámica con <code class="inl">for</code> es la base de <strong>Green Properties Index</strong>, que lista y clasifica propiedades eco-friendly según su ahorro energético. La integración con Firebase mediante <code class="inl">do-while</code> y asincronía permite que esos datos se guarden y actualicen en tiempo real.</p>
+
+  <h1 class="seccion">Evidencia: scripts en ejecución</h1>
+  <p>A continuación se muestra la captura de la página de demostración, donde se
+  ejecutan los tres scripts (validación del formulario, lista eco-friendly y
+  guardado simulado en Firebase), a partir de los archivos
+  <code class="inl">demo_estructuras.html</code> y <code class="inl">demo_script.js</code>.</p>
+  <div style="text-align:center;margin-top:14px;">
+    <img src="cap.png" alt="Captura de los scripts en ejecución"
+         style="max-width:100%;border:1px solid #999;">
+  </div>
+
+  <h1 class="seccion">Conclusión</h1>
+  <p>Las estructuras de control son esenciales para construir aplicaciones web dinámicas. Las de decisión (<code class="inl">if</code>, <code class="inl">switch</code>) permiten validar y clasificar datos, mientras que las de iteración (<code class="inl">for</code>, <code class="inl">while</code>, <code class="inl">do-while</code>) permiten procesar listas y gestionar reintentos. Aplicadas al sector PropTech, hacen posibles funcionalidades clave de Smart Listings y Green Properties Index, y combinadas con Firebase permiten que la información se valide, genere y almacene de forma confiable. El código se documentó y se subió a GitHub según lo solicitado.</p>
+
+  <h1 class="seccion">Referencias</h1>
+  <ul class="ref">
+    <li>Mozilla Developer Network. <em>Control flow and error handling</em>. MDN Web Docs.</li>
+    <li>Mozilla Developer Network. <em>Loops and iteration</em>. MDN Web Docs.</li>
+    <li>Google. <em>Firebase Documentation</em>. firebase.google.com.</li>
+    <li>GitHub. <em>GitHub Docs</em>. docs.github.com.</li>
+    <li>W3Schools. <em>JavaScript Switch, Loops</em>. w3schools.com.</li>
+  </ul>
+
+</div>
+
+</body>
+</html>

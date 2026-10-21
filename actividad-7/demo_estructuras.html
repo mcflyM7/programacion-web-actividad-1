@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estructuras de control - PropertyStream Tech</title>
+  <link rel="stylesheet" href="demo_estilos.css">
+</head>
+<body>
+  <h1>Estructuras de control en JavaScript</h1>
+  <p class="intro">Validación de formularios y listas dinámicas para PropTech.</p>
+
+  <!-- ===== 1. Formulario con validación (if + switch) ===== -->
+  <section class="bloque">
+    <h2>1. Publicar propiedad (validación con if y switch)</h2>
+    <form id="formProp" onsubmit="return validarFormulario(event)">
+      <label>Precio (MXN):
+        <input type="text" id="precio" placeholder="Ej. 12500">
+      </label>
+      <label>Ubicación:
+        <input type="text" id="ubicacion" placeholder="Ej. Colonia Centro">
+      </label>
+      <label>Tipo:
+        <select id="tipo">
+          <option value="">-- Selecciona --</option>
+          <option value="renta">Renta</option>
+          <option value="venta">Venta</option>
+          <option value="eco">Eco-friendly</option>
+        </select>
+      </label>
+      <button type="submit">Validar y publicar</button>
+    </form>
+    <p id="resultadoForm" class="salida"></p>
+  </section>
+
+  <!-- ===== 2. Lista eco-friendly dinámica (for / while) ===== -->
+  <section class="bloque">
+    <h2>2. Propiedades eco-friendly (iteración con for)</h2>
+    <button onclick="generarEcoFriendly()">Generar lista</button>
+    <ul id="listaEco" class="salida"></ul>
+  </section>
+
+  <!-- ===== 3. Simulación Firebase ===== -->
+  <section class="bloque">
+    <h2>3. Guardar en Firebase (simulado)</h2>
+    <button onclick="guardarEnFirebase()">Enviar a Firebase</button>
+    <p id="resultadoFb" class="salida"></p>
+  </section>
+
+  <script src="demo_script.js"></script>
+</body>
+</html>
